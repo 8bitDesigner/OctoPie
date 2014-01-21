@@ -38,6 +38,8 @@ Octopie.prototype.add = function(name) {
   return this
 }
 
+module.exports = Octopie
+
 /*
 server = require('octopod')({
   name: 'Octopod',
