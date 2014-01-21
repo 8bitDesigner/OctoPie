@@ -14,5 +14,10 @@
   "license": "BSD",
   "bugs": {
     "url": "https://github.com/8bitDesigner/OctoPie/issues"
+  },
+  "dependencies": {
+    "underscore": "~1.5.2",
+    "mocha": "~1.17.0",
+    "node-github": "0.0.3"
   }
 }
