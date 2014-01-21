@@ -1,5 +1,5 @@
 var assert = require("assert")
-var Octopie = require('../index.js');
+var Octopie = require('../lib/octopie');
 
 function octoFactory(name, token, url) {
   // For easy testing - preconfigured objects
