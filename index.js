@@ -1,5 +1,6 @@
 var GitHub = require('node-github')
   , underscore = require('underscore')
+  , Event = require('./lib/event')
   , _ = underscore
 
 function Octopie(opts) {
@@ -18,6 +19,13 @@ function Octopie(opts) {
     throw new Error('No auth token specified')
   }
 
+  // Require our publicly accessible URL
+  if (opts.url) {
+    this.url = opts.url
+  } else {
+    throw new Error('No public URL was specified, and we kinda need that')
+  }
+
   // Init our list of repos and events we'll be listening to
   this.repos = []
   this.events = []
@@ -30,12 +38,39 @@ Octopie.prototype._find = function(type, name) {
 }
 
 Octopie.prototype.add = function(name) {
-  var repo = { name: name }
-    , found = this._find('repo', name)
-
-  if (!found) { this.repos.push(repo) }
+  this.repos.push(name)
+  this.repos = _(this.repos).chain().sort().uniq()
 
   return this
+}
+
+Octopie.prototype.on = function(name, cb) {
+  var found = this._find('event', name)
+
+  // If found, add our events to the callback queue
+  if (found) { event.add(cb) }
+  else { this.events.push(new Event(name, cb)) }
+
+  return this
+}
+
+Octopie.prototype._configureHooks = function() {
+  this.repos.forEach(function(repo) {
+    this.events.forEach(function(event) {
+      // implement this
+      // this.gh.getHooks({ repo: repo }, function(err, hooks) {
+      //   if (!hooks.events.includes(event.name)) {
+      //     this.gh.updateHook({}, cb)
+      //   } else {
+      //     this.gh.createHook({}, cb)
+      //   }
+      // })
+    })
+  })
+}
+
+Octopie.prototype.listen = function(port) {
+  this._configureHooks()
 }
 
 module.exports = Octopie
