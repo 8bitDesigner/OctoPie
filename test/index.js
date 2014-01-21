@@ -4,15 +4,18 @@ var Octopie = require('../index.js');
 
 
 describe('Octopie', function() {
+  var octopie;
   it('should require a name', function () {
     assert.throws(function () {
-      var octopie = new Octopie();
+      octopie = new Octopie();
     });
     assert.throws(function () {
-      var octopie = new Octopie({ name:'foo' });
+      octopie = new Octopie({ name:'foo' });
     });
+  });
+  it('should require an auth token', function () {
     assert.doesNotThrow(function () {
-      var octopie = new Octopie({ name:'foo', authToken:'bar' });
+      octopie = new Octopie({ name:'foo', authToken:'bar' });
     });
-  })
+  });
 });
