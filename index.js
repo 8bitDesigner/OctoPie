@@ -1,4 +1,4 @@
-var GitHub = require('github')
+var GitHub = require('node-github')
   , underscore = require('underscore')
   , _ = underscore
 
