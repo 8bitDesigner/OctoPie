@@ -39,7 +39,7 @@ Octopie.prototype._find = function(type, name) {
 
 Octopie.prototype.add = function(name) {
   this.repos.push(name)
-  this.repos = _(this.repos).chain().sort().uniq()
+  this.repos = _(this.repos).chain().sort().uniq().value()
 
   return this
 }

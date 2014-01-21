@@ -16,10 +16,21 @@ describe('Our event object', function() {
   })
 
   it('should accept single callbacks and arrays of callbacks', function() {
-    var cb1 = function() {}
-    var foo = new Event('foo', cb1)
+    var cb = function() {}
+    var foo = new Event('foo', cb)
+    assert.equal(foo.callbacks[0], cb)
 
-    console.log('my callbacks', foo.callbacks)
-    assert.equal(foo.callbacks[0], cb1)
+    var cbs = [function() {}, function() {}]
+    var bar = new Event('bar', cbs)
+    assert.equal(bar.callbacks[0], cbs[0])
+    assert.equal(bar.callbacks[1], cbs[1])
+  })
+
+  it("should strip out non-functioney things", function() {
+    var cbs = ['bacon', function() {}]
+    var foo = new Event('foo', cbs)
+
+    assert.equal(foo.callbacks[0], cbs[1])
+    assert.equal(foo.callbacks[1], undefined)
   })
 })
