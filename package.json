@@ -4,6 +4,7 @@
   "description": "An easy way to add GitHub hooks to your project",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha test",
     "watch": "mocha -w test"
   },

@@ -24,6 +24,14 @@ describe('Octopie', function() {
     });
   });
 
+  it('should be callable without using the new operator', function() {
+    var withNew = new Octopie({ name: 'foo', authToken: 'bar', url: 'baz' })
+    var withoutNew = Octopie({ name: 'foo', authToken: 'bar', url: 'baz' })
+
+    assert(withNew instanceof Octopie)
+    assert(withoutNew instanceof Octopie)
+  })
+
   it('should add repositories', function () {
     var octopie = octoFactory()
     octopie.add('fullscreeninc/bacon');
