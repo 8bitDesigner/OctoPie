@@ -59,4 +59,10 @@ describe('Octopie', function() {
     assert.deepEqual(octopie.events[0].callbacks, [fooCb])
     assert.deepEqual(octopie.events[1].callbacks, [barCb1, barCb2])
   })
+
+  it('should configure hooks', function () {
+    var octopie = octoFactory();
+    octopie.add('fullscreeninc/bacon');
+    octopie._configureHooks();
+  });
 });
