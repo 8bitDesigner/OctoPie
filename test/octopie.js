@@ -36,4 +36,19 @@ describe('Octopie', function() {
     octopie.add('fullscreeninc/bacon');
     assert.deepEqual(octopie.repos, ["fullscreeninc/bacon"]);
   })
+
+  it("should allow you to create event listeners", function() {
+    var octopie = octoFactory()
+    fooCb = function fooCb() {}
+    barCb1 = function barCb1() {}
+    barCb2 = function barCb2() {}
+
+    octopie.on('foo', fooCb);
+    octopie.on('bar', barCb1);
+    octopie.on('bar', barCb2);
+
+    assert.equal(octopie.events.length, 2)
+    assert.deepEqual(octopie.events[0].callbacks, [fooCb])
+    assert.deepEqual(octopie.events[1].callbacks, [barCb1, barCb2])
+  })
 });
