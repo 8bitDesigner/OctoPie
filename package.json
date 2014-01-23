@@ -19,8 +19,11 @@
   },
   "dependencies": {
     "underscore": "~1.5.2",
-    "mocha": "~1.17.0",
     "node-github": "0.0.3",
     "async": "~0.2.9"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.0",
+    "sinon": "~1.7.3"
   }
 }
