@@ -89,31 +89,4 @@ describe('Octopie', function() {
     assert(octopie.server.on.calledWith('issues', fn2))
     assert(octopie.server.on.calledWith('push', fn3))
   })
-
-  it("should not find hooks on a repo that is inaccessible", function (done) {
-    var octopie = octoFactory();
-    octopie.add('fullscreeninc/bacon');
-    octopie._configureHooks(function (err, hooks) {
-      assert.deepEqual(hooks, [])
-      done();
-    });
-  });
-
-  it("should create our hook in response to not finding our hook", function (done) {
-    var octopie = octoFactory();
-    octopie.add('ryancbarry/underscore');
-    octopie.on('issues', function () {});
-    octopie.on('pull_request', function () {});
-    octopie._configureHooks(function (err, hooks) {
-      console.log('configured : hooks:\n', hooks);
-      // assert.deepEqual(hooks, [])
-      // var hook = hooks[0];
-      // assert(hook.config.url === 'http://google.com');
-      // assert(hook.name === 'web');
-      // assert.deepEqual(hook.events, ['issues', 'pull_request']);
-      // assert(hook.config.content_type === 'json');
-      // assert(hook.config.insecure_ssl === '1');
-      done();
-    });
-  });
 });
