@@ -1,6 +1,6 @@
 {
   "name": "OctoPie",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "An easy way to add GitHub hooks to your project",
   "main": "index.js",
   "scripts": {
