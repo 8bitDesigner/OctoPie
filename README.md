@@ -9,7 +9,7 @@ First off, require Octopie into your project and boot up an instance:
 ``` javascript
 var Octopie = require('octopie')
 var myServer = new Octopie({
-  url: 'https://path.to/my/server
+  url: 'https://path.to/my/server'
   authToken: '...'
 })
 ```
