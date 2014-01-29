@@ -48,7 +48,7 @@ The Octopie constructor takes an object with two properties as its only argument
 
 This should be the URL of the Octopie server. The server needs to be publically accessible, as GitHub will need to reach it with its event requests.
 
-#### `token`
+#### `authToken`
 
 This should be a GitHub auth token which will be used to log into GitHub and register hook events. Keep this secret, safe, and out of source control, as auth tokens are effectively passwords. 
 
