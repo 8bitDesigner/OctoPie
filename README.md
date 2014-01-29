@@ -61,16 +61,14 @@ Each instance of the Octopie server has the following methods:
 #### `Octopie#add('user/repo')`
 Adds a repo to the list of repositiories to watch.
 
-Usage:
 ``` javascript
 server = new Octopie({ })
 server.add('my/repository')
 ```
 
 #### `Octopie#on('event', callback)`
-Registers an callback to be run every time GitHub pings our server with the requested event. The callback will be run with one argument, a the JSON payload from GitHub
+Registers an callback to be run every time GitHub pings our server with the requested event. The callback will be run with one argument, a the JSON payload from GitHub.
 
-Usage:
 ``` javascript
 server = new Octopie({ })
 server.on('push', function(data) {
@@ -81,7 +79,6 @@ server.on('push', function(data) {
 #### `Octopie#listen(80)`
 This causes the server to register all requested hooks with GitHub, and when the hooks are in place, starts listening for events on the given port.
 
-Usage:
 ``` javascript
 server = new Octopie({ })
 server.listen(80)
