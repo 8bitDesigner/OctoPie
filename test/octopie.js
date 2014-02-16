@@ -89,4 +89,41 @@ describe('Octopie', function() {
     assert(octopie.server.on.calledWith('issues', fn2))
     assert(octopie.server.on.calledWith('push', fn3))
   })
+
+  it("should bind events while tracking GitHub events", function() {
+    var octopie = octoFactory()
+      , fooSpy = sinon.spy()
+      , pushSpy = sinon.spy()
+
+    octopie.on('foo', fooSpy)
+    octopie.on('push', pushSpy)
+
+    assert.deepEqual(octopie.events, ["push"])
+    assert(octopie.server.on.calledWith('foo', fooSpy))
+    assert(octopie.server.on.calledWith('push', pushSpy))
+  })
+
+  it("should expose proxy all of eventEmitter's methods to the server", function() {
+    var octopie = octoFactory()
+      , onBarSpy = sinon.spy()
+      , addListenerFooSpy = sinon.spy()
+      , onFooSpy = sinon.spy()
+
+    octopie.on('bar', onBarSpy)
+    octopie.on('foo', onFooSpy)
+    octopie.addListener('foo', addListenerFooSpy)
+
+    assert.deepEqual(octopie.listeners(), octopie.server.listeners())
+    assert.deepEqual(octopie.listeners('foo'), octopie.server.listeners('foo'))
+
+    octopie.emit('foo', 1, 2, 3)
+    assert(onFooSpy.callCount === 1)
+    assert(onFooSpy.calledWith(1, 2, 3))
+    assert(addListenerFooSpy.callCount === 1)
+    assert(addListenerFooSpy.calledWith(1, 2, 3))
+
+    octopie.removeAllListeners()
+    octopie.emit('bar')
+    assert(onBarSpy.notCalled)
+  })
 });
