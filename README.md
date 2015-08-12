@@ -42,7 +42,7 @@ Documentation on which GitHub events are available and what they're fired in res
 
 ### Ocotpie options
 
-The Octopie constructor takes an object with two properties as its only argument, eg: `new Octopie({ url: '...', token: '...' })`
+The Octopie constructor takes an object whose arguments are outline below, eg: `new Octopie({ url: '...', token: '...' })`
 
 #### `url`
 
@@ -53,6 +53,11 @@ This should be the URL of the Octopie server. The server needs to be publically 
 This should be a GitHub auth token which will be used to log into GitHub and register hook events. Keep this secret, safe, and out of source control, as auth tokens are effectively passwords. 
 
 You can generate an auth token for the current GitHub user here: https://github.com/settings/tokens/new
+
+#### `shouldSyncHooks`
+
+Boolean (defaults to `false`) - should OctoPie attempt to install any configured hooks on the its tracked repositories? Off by default as this requires its access token to have admin privileges on the repos it tracks.
+
 
 ### Octopie methods
 
@@ -77,9 +82,11 @@ server.on('push', function(data) {
 ```
 
 #### `Octopie#listen(80)`
-This causes the server to register all requested hooks with GitHub, and when the hooks are in place, starts listening for events on the given port.
+
+Starts listening for events on the given port. If `shouldSyncHooks` is true, it causes the server to register all requested hooks with GitHub before listening for any events.
 
 ``` javascript
 server = new Octopie({ })
 server.listen(80)
 ```
+
